@@ -37,8 +37,12 @@ def guess_letter():
     if guessted_letter in used_letters:
         print(f'эта буква уже была, попробуйте снова')
         guess_letter()
+        
     if len(guessted_letter) > 1:
         print(f'введите 1 букву')
+        guess_letter()
+    if any(char.isnumeric() for char in guessted_letter):
+        print ('введена цифра, введите букву')
         guess_letter()
     return guessted_letter
 
@@ -59,6 +63,7 @@ while turn < 10 and '|_|' in hidden_list:
     turn += 1
     if '|_|' not in hidden_list:
         print('Победа!')
+        break
     if turn == 10:
         print('Поражение')
 
