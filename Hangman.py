@@ -3,18 +3,6 @@ from pathlib import Path
 import json
 
 file_path = Path('words.json')
-list_of_words = [
-    'banana',
-    'dog',
-    'ball',
-    'flash',
-    'arrow',
-    'sword',
-    'monkey',
-    'bishop',
-    'egg',
-    'silk'
-]
 
 if file_path.exists():
     print("Файл найден! Открываю...")
