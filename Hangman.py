@@ -1,5 +1,8 @@
 import random
+from pathlib import Path
+import json
 
+file_path = Path('words.json')
 list_of_words = [
     'banana',
     'dog',
@@ -12,6 +15,19 @@ list_of_words = [
     'egg',
     'silk'
 ]
+
+if file_path.exists():
+    print("Файл найден! Открываю...")
+    with open(file_path) as file:
+        list_of_words= json.load(file)
+        # print (list_of_words)
+        # print (type(list_of_words))
+        # for line in file:
+        #      list_of_words.append(line.strip())
+        #print(contents) # ... ваш код для работы с файлом
+else:
+    print("Файл не найден. Проверьте название и путь.")
+
 turn = 0 #номер хода
 used_letters = [] #список использованных букв
 chosen_word = random.choice(list_of_words) #выбор случайного слова из списка
@@ -38,6 +54,7 @@ def try_to_guess():
         print(f'эта буква уже была, попробуйте снова')
         return   
     if len(guessted_letter) == 0:
+        print(f'введите букву')
         return
     if len(guessted_letter) > 1:
         print(f'введите 1 букву')
