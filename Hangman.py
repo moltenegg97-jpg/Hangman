@@ -31,24 +31,28 @@ print('----------')
 hidden_word = hidden_word.join(hidden_list) #перевод скрытого списка в строку
 print(hidden_word)
 
-def guess_letter():
+def try_to_guess():
     print('enter letter')
     guessted_letter = input().lower()
     if guessted_letter in used_letters:
         print(f'эта буква уже была, попробуйте снова')
-        guess_letter()
-        
+        return   
+    if len(guessted_letter) == 0:
+        return
     if len(guessted_letter) > 1:
         print(f'введите 1 букву')
-        guess_letter()
+        return
     if any(char.isnumeric() for char in guessted_letter):
         print ('введена цифра, введите букву')
-        guess_letter()
+        return
+        
     return guessted_letter
 
 while turn < 10 and '|_|' in hidden_list:
     print(f'turn: {turn}')
-    guessted_letter = guess_letter()
+    guessted_letter = try_to_guess()
+    while guessted_letter == None:
+        guessted_letter = try_to_guess()
     for i in range(len(chosen_word)):
         if guessted_letter == chosen_list[i]:
             hidden_list[i] = chosen_list[i]
