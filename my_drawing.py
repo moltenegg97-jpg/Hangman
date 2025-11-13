@@ -26,17 +26,37 @@ def draw_head():
 
 def draw_body():
     turtle.forward(90)
+    print (turtle.position())
     turtle.teleport(-65, 55)
     turtle.right(125)
+    
+
+def draw_left_arm():
+    turtle.forward(50)
+    turtle.teleport(-65, 55)
+    turtle.right(110)
+
+def draw_right_arm():
+    turtle.forward(50)
+    turtle.teleport(-65, -5)
+    turtle.left(55)
+    turtle.right(160)
+
+def draw_right_leg():
+    turtle.forward(55)
+    turtle.teleport(-65, -5)
+    turtle.left(160)
+    turtle.left(160)
+
+def draw_left_leg():
+    turtle.forward(55)
 
 draw_main_frame()
 draw_head()
 draw_body()
-
-turtle.forward(50)
-
-
-
-print (turtle.position())
+draw_left_arm()
+draw_right_arm()
+draw_right_leg()
+draw_left_leg()
 
 turtle.mainloop()
