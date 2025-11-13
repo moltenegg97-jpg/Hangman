@@ -1,6 +1,9 @@
 import random
 from pathlib import Path
 import json
+import my_drawing
+
+
 
 file_path = Path('words.json')
 
@@ -37,7 +40,7 @@ print(hidden_word)
 
 def try_to_guess():
     print('enter letter')
-    guessted_letter = input().lower()
+    guessted_letter = input().upper()
     if guessted_letter in used_letters:
         print(f'эта буква уже была, попробуйте снова')
         return   
@@ -53,7 +56,7 @@ def try_to_guess():
         
     return guessted_letter
 
-while turn < 10 and '|_|' in hidden_list:
+while turn < 6 and '|_|' in hidden_list:
     print(f'turn: {turn}')
     guessted_letter = try_to_guess()
     while guessted_letter == None:
@@ -63,17 +66,20 @@ while turn < 10 and '|_|' in hidden_list:
             hidden_list[i] = chosen_list[i]
     if guessted_letter not in chosen_word:
         print('этой буквы нет в слове')
+        turn += 1
     used_letters = used_letters + [f'{guessted_letter}']
     hidden_word = ''        
     hidden_word = hidden_word.join(hidden_list)
     print(f'used_letters: {used_letters}')
     print(hidden_word)
-
-    turn += 1
+    
+    my_drawing.partial_drawing(i)
     if '|_|' not in hidden_list:
         print('Победа!')
         break
-    if turn == 10:
+    if turn == 6:
         print('Поражение')
+
+#my_drawing.turtle.mainloop()
 
 print('игра окончена')

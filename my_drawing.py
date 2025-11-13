@@ -1,6 +1,6 @@
 import turtle
 
-print (turtle.position())
+#print (turtle.position())
 
 def draw_main_frame():
     turtle.teleport(0, -100)
@@ -51,12 +51,21 @@ def draw_right_leg():
 def draw_left_leg():
     turtle.forward(55)
 
-draw_main_frame()
-draw_head()
-draw_body()
-draw_left_arm()
-draw_right_arm()
-draw_right_leg()
-draw_left_leg()
+def partial_drawing(mistake):
+    print(f'вызвана функция с mistake = {mistake}')
+    if mistake == 0:
+        draw_main_frame()
+    if mistake == 1:
+        draw_head()
+    if mistake == 2:
+        draw_body()
+    if mistake == 3:
+        draw_left_arm()
+    if mistake == 4:
+        draw_right_arm()
+    if mistake == 5:
+        draw_right_leg()
+    if mistake == 6:
+        draw_left_leg()
 
-turtle.mainloop()
+#turtle.mainloop()
