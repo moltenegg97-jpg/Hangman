@@ -4,7 +4,7 @@ import json
 import my_drawing
 
 
-
+new_drawing = my_drawing.DrawingHangman()
 file_path = Path('words.json')
 
 if file_path.exists():
@@ -57,6 +57,8 @@ def try_to_guess():
     return guessted_letter
 
 while turn < 6 and '|_|' in hidden_list:
+    if turn == 0:
+        new_drawing.partial_drawing(turn)
     print(f'turn: {turn}')
     guessted_letter = try_to_guess()
     while guessted_letter == None:
@@ -73,13 +75,14 @@ while turn < 6 and '|_|' in hidden_list:
     print(f'used_letters: {used_letters}')
     print(hidden_word)
     
-    my_drawing.partial_drawing(i)
+    if turn != 0:
+        new_drawing.partial_drawing(turn)
     if '|_|' not in hidden_list:
         print('Победа!')
         break
     if turn == 6:
         print('Поражение')
 
-#my_drawing.turtle.mainloop()
+my_drawing.turtle.mainloop()
 
 print('игра окончена')
