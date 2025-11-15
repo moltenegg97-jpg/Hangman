@@ -1,58 +1,69 @@
 import turtle
+import tkinter
+
+
+class MainWindow:
+    window = tkinter.Tk()  #не работает
+    canvas1 = tkinter.Canvas(window, width=600, height=600)
+    canvas1.grid(column=1, row=1)
+    screen = turtle.TurtleScreen(canvas1)
+    test_turtle = turtle.RawTurtle(screen)
 
 #print (turtle.position())
 class DrawingHangman:
-    def __init__(self):
+    
+    def __init__(self, turtle_instance):
         self.used_argument = set()
-
+        self.turtle = turtle_instance        
+        
     def draw_main_frame(self):
-        turtle.teleport(0, -100)
+        self.turtle.teleport(0, -100)
 
-        turtle.left(180)
-        turtle.forward(50)
-        turtle.teleport(0, -100)
-        turtle.left(180)
-        turtle.forward(50)
-        turtle.teleport(15, -100)
-        turtle.left(90)
-        turtle.forward(250)
-        turtle.left(90)
-        turtle.forward(80)
-        turtle.left(90)
-        turtle.forward(25)
+        self.turtle.left(180)
+        self.turtle.forward(50)
+        self.turtle.teleport(0, -100)
+        self.turtle.left(180)
+        self.turtle.forward(50)
+        self.turtle.teleport(15, -100)
+        self.turtle.left(90)
+        self.turtle.forward(250)
+        self.turtle.left(90)
+        self.turtle.forward(80)
+        self.turtle.left(90)
+        self.turtle.forward(25)
 
     def draw_head(self):
-        turtle.right(90)
-        turtle.circle(20)
-        turtle.left(90)
-        turtle.teleport(-65, 85)
+        self.turtle.right(90)
+        self.turtle.circle(20)
+        self.turtle.left(90)
+        self.turtle.teleport(-65, 85)
 
     def draw_body(self):
-        turtle.forward(90)
-        print (turtle.position())
-        turtle.teleport(-65, 55)
-        turtle.right(125)
+        self.turtle.forward(90)
+        print (self.turtle.position())
+        self.turtle.teleport(-65, 55)
+        self.turtle.right(125)
     
 
     def draw_left_arm(self):
-        turtle.forward(50)
-        turtle.teleport(-65, 55)
-        turtle.right(110)
+        self.turtle.forward(50)
+        self.turtle.teleport(-65, 55)
+        self.turtle.right(110)
 
     def draw_right_arm(self):
-        turtle.forward(50)
-        turtle.teleport(-65, -5)
-        turtle.left(55)
-        turtle.right(160)
+        self.turtle.forward(50)
+        self.turtle.teleport(-65, -5)
+        self.turtle.left(55)
+        self.turtle.right(160)
 
     def draw_right_leg(self):
-        turtle.forward(55)
-        turtle.teleport(-65, -5)
-        turtle.left(160)
-        turtle.left(160)
+        self.turtle.forward(55)
+        self.turtle.teleport(-65, -5)
+        self.turtle.left(160)
+        self.turtle.left(160)
 
     def draw_left_leg(self):
-        turtle.forward(55)
+        self.turtle.forward(55)
     
     
     def partial_drawing(self, mistake):
@@ -74,3 +85,8 @@ class DrawingHangman:
                 self.draw_right_leg()
             if mistake == 6:
                 self.draw_left_leg()
+
+# test_window = MainWindow()
+
+# test_drawing = DrawingHangman(test_window.test_turtle)
+# test_drawing.partial_drawing(0)

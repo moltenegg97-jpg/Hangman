@@ -3,9 +3,12 @@ from pathlib import Path
 import json
 import my_drawing
 
-
-new_drawing = my_drawing.DrawingHangman()
+window = my_drawing.MainWindow()
+new_drawing = my_drawing.DrawingHangman(window.test_turtle)
 file_path = Path('words.json')
+
+
+
 
 if file_path.exists():
     print("Файл найден! Открываю...")
@@ -83,6 +86,7 @@ while turn < 6 and '|_|' in hidden_list:
     if turn == 6:
         print('Поражение')
 
-my_drawing.turtle.mainloop()
+#my_drawing.turtle.mainloop()
+window.window.mainloop()
 
 print('игра окончена')
