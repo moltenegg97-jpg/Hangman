@@ -2,10 +2,28 @@ import turtle
 import tkinter
 
 
+
 class MainWindow:
     window = tkinter.Tk()  #не работает
     canvas1 = tkinter.Canvas(window, width=600, height=600)
     canvas1.grid(column=1, row=1)
+
+    message_text = tkinter.StringVar()
+    message_box = tkinter.Label(window, textvariable=message_text)
+    message_text.set('message box')
+    message_box.grid(column=1, row=2)
+
+    word_text = tkinter.StringVar()
+    word_box = tkinter.Label(window, textvariable=word_text)
+    word_text.set('word_box')
+    word_box.grid(column=1, row=3)
+
+    used_letters_text = tkinter.StringVar()
+    used_letters_box = tkinter.Label(window, textvariable=used_letters_text)
+    used_letters_text.set('used_letters_text')
+    used_letters_box.grid(column=1, row=4)
+
+
     screen = turtle.TurtleScreen(canvas1)
     test_turtle = turtle.RawTurtle(screen)
 

@@ -7,9 +7,6 @@ window = my_drawing.MainWindow()
 new_drawing = my_drawing.DrawingHangman(window.test_turtle)
 file_path = Path('words.json')
 
-
-
-
 if file_path.exists():
     print("Файл найден! Открываю...")
     with open(file_path) as file:
@@ -40,21 +37,26 @@ print(hidden_list)
 print('----------')
 hidden_word = hidden_word.join(hidden_list) #перевод скрытого списка в строку
 print(hidden_word)
+window.word_text.set(f'{hidden_word}')
 
 def try_to_guess():
     print('enter letter')
     guessted_letter = input().upper()
     if guessted_letter in used_letters:
         print(f'эта буква уже была, попробуйте снова')
+        window.message_text.set('эта буква уже была, попробуйте снова')
         return   
     if len(guessted_letter) == 0:
         print(f'введите букву')
+        window.message_text.set('введите букву')
         return
     if len(guessted_letter) > 1:
         print(f'введите 1 букву')
+        window.message_text.set('введите букву')
         return
     if any(char.isnumeric() for char in guessted_letter):
         print ('введена цифра, введите букву')
+        window.message_text.set('введена цифра, введите букву')
         return
         
     return guessted_letter
@@ -71,12 +73,15 @@ while turn < 6 and '|_|' in hidden_list:
             hidden_list[i] = chosen_list[i]
     if guessted_letter not in chosen_word:
         print('этой буквы нет в слове')
+        window.message_text.set('этой буквы нет в слове') 
         turn += 1
     used_letters = used_letters + [f'{guessted_letter}']
     hidden_word = ''        
     hidden_word = hidden_word.join(hidden_list)
     print(f'used_letters: {used_letters}')
+    window.used_letters_text.set(f'{used_letters}')
     print(hidden_word)
+    window.word_text.set(f'{hidden_word}')
     
     if turn != 0:
         new_drawing.partial_drawing(turn)
