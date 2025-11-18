@@ -4,30 +4,40 @@ import tkinter
 
 
 class MainWindow:
-    window = tkinter.Tk()  #не работает
-    canvas1 = tkinter.Canvas(window, width=600, height=600)
-    canvas1.grid(column=1, row=1)
+    
+    def __init__(self):
+            self.window = tkinter.Tk()  #не работает
+            self.canvas1 = tkinter.Canvas(self.window, width=600, height=600)
+            self.canvas1.grid(column=1, row=1)
 
-    message_text = tkinter.StringVar()
-    message_box = tkinter.Label(window, textvariable=message_text)
-    message_text.set('message box')
-    message_box.grid(column=1, row=2)
+            self.message_text = tkinter.StringVar()
+            self.message_box = tkinter.Label(self.window, textvariable = self.message_text)
+            self.message_text.set('message box')
+            self.message_box.grid(column=1, row=2)
 
-    word_text = tkinter.StringVar()
-    word_box = tkinter.Label(window, textvariable=word_text)
-    word_text.set('word_box')
-    word_box.grid(column=1, row=3)
+            self.word_text = tkinter.StringVar()
+            self.word_box = tkinter.Label(self.window, textvariable = self.word_text)
+            self.word_text.set('word_box')
+            self.word_box.grid(column=1, row=3)
 
-    used_letters_text = tkinter.StringVar()
-    used_letters_box = tkinter.Label(window, textvariable=used_letters_text)
-    used_letters_text.set('used_letters_text')
-    used_letters_box.grid(column=1, row=4)
+            self.used_letters_text = tkinter.StringVar()
+            self.used_letters_box = tkinter.Label(self.window, textvariable = self.used_letters_text)
+            self.used_letters_text.set('used_letters_text')
+            self.used_letters_box.grid(column=1, row=4)
+   
+            self.screen = turtle.TurtleScreen(self.canvas1)
+            self.test_turtle = turtle.RawTurtle(self.screen)
+            self.entry_window_text = tkinter.StringVar()
+            self.entry_window = tkinter.Entry(self.window, textvariable = self.entry_window_text)
+            self.entry_window.grid(column=1, row=5)
 
-
-    screen = turtle.TurtleScreen(canvas1)
-    test_turtle = turtle.RawTurtle(screen)
-
-#print (turtle.position())
+            
+    def return_value(event, self):
+        return self.entry_window_text
+    
+                
+        
+    #print (turtle.position())
 class DrawingHangman:
     
     def __init__(self, turtle_instance):

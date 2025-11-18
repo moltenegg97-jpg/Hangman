@@ -42,6 +42,7 @@ window.word_text.set(f'{hidden_word}')
 def try_to_guess():
     print('enter letter')
     guessted_letter = input().upper()
+    window.bind("<Return>", window.return_value)
     if guessted_letter in used_letters:
         print(f'эта буква уже была, попробуйте снова')
         window.message_text.set('эта буква уже была, попробуйте снова')
@@ -53,6 +54,10 @@ def try_to_guess():
     if len(guessted_letter) > 1:
         print(f'введите 1 букву')
         window.message_text.set('введите букву')
+        return
+    if ord(guessted_letter) > 127: #функция ord() возвращает значение символа по Юникоду, 127 последняя англ. буква
+        print(f'буква должна быть английского алфавита')
+        window.message_text.set('буква должна быть английского алфавита')
         return
     if any(char.isnumeric() for char in guessted_letter):
         print ('введена цифра, введите букву')
