@@ -39,48 +39,56 @@ hidden_word = hidden_word.join(hidden_list) #перевод скрытого с�
 print(hidden_word)
 window.word_text.set(f'{hidden_word}')
 
-def try_to_guess():
+
+def try_to_guess(window):
     print('enter letter')
-    guessted_letter = input().upper()
-    window.bind("<Return>", window.return_value)
-    if guessted_letter in used_letters:
+     # Ждем, пока пользователь введет букву и нажмет Enter
+    window.guessed_letter = None
+    
+    # Ждем, пока guessed_letter не получит значение
+    while window.guessed_letter is None:
+        window.window.update()  # Обновляем окно, обрабатываем события
+    
+    guessed_letter = window.guessed_letter
+    print(f'Введена буква: {guessed_letter}')
+    if guessed_letter in used_letters:
         print(f'эта буква уже была, попробуйте снова')
         window.message_text.set('эта буква уже была, попробуйте снова')
         return   
-    if len(guessted_letter) == 0:
+    if len(guessed_letter) == 0:
         print(f'введите букву')
         window.message_text.set('введите букву')
         return
-    if len(guessted_letter) > 1:
+    if len(guessed_letter) > 1:
         print(f'введите 1 букву')
         window.message_text.set('введите букву')
         return
-    if ord(guessted_letter) > 127: #функция ord() возвращает значение символа по Юникоду, 127 последняя англ. буква
+    if ord(guessed_letter) > 127: #функция ord() возвращает значение символа по Юникоду, 127 последняя англ. буква
         print(f'буква должна быть английского алфавита')
         window.message_text.set('буква должна быть английского алфавита')
         return
-    if any(char.isnumeric() for char in guessted_letter):
+    if any(char.isnumeric() for char in guessed_letter):
         print ('введена цифра, введите букву')
         window.message_text.set('введена цифра, введите букву')
         return
         
-    return guessted_letter
+    return guessed_letter
 
 while turn < 6 and '|_|' in hidden_list:
     if turn == 0:
         new_drawing.partial_drawing(turn)
     print(f'turn: {turn}')
-    guessted_letter = try_to_guess()
-    while guessted_letter == None:
-        guessted_letter = try_to_guess()
+    guessed_letter = try_to_guess(window)
+    while guessed_letter == None:
+        guessed_letter = try_to_guess(window)
     for i in range(len(chosen_word)):
-        if guessted_letter == chosen_list[i]:
+        if guessed_letter == chosen_list[i]:
             hidden_list[i] = chosen_list[i]
-    if guessted_letter not in chosen_word:
+    if guessed_letter not in chosen_word:
         print('этой буквы нет в слове')
         window.message_text.set('этой буквы нет в слове') 
         turn += 1
-    used_letters = used_letters + [f'{guessted_letter}']
+    used_letters = used_letters + [f'{guessed_letter}']
     hidden_word = ''        
     hidden_word = hidden_word.join(hidden_list)
     print(f'used_letters: {used_letters}')

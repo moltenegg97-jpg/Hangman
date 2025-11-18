@@ -31,12 +31,15 @@ class MainWindow:
             self.entry_window = tkinter.Entry(self.window, textvariable = self.entry_window_text)
             self.entry_window.grid(column=1, row=5)
 
-            
-    def return_value(event, self):
-        return self.entry_window_text
-    
-                
-        
+            # Добавляем переменную для хранения введенной буквы
+            self.guessed_letter = None
+            # Связываем нажатие Enter с обработчиком
+            self.entry_window.bind('<Return>', self.process_input)
+    def process_input(self, event):
+        """Обрабатывает ввод при нажатии Enter"""
+        self.guessed_letter = self.entry_window_text.get().upper()
+        # Очищаем поле ввода после получения значения
+        self.entry_window_text.set("")
     #print (turtle.position())
 class DrawingHangman:
     
