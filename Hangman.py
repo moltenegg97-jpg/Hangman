@@ -5,7 +5,7 @@ import my_drawing
 
 window = my_drawing.MainWindow()
 new_drawing = my_drawing.DrawingHangman(window.test_turtle)
-file_path = Path('words.json')
+file_path = Path('new_file.json')
 
 if file_path.exists():
     print("Файл найден! Открываю...")
@@ -42,6 +42,7 @@ window.word_text.set(f'{hidden_word}')
 
 def try_to_guess(window):
     print('enter letter')
+    window.game_state_text.set('Введите букву')
      # Ждем, пока пользователь введет букву и нажмет Enter
     window.guessed_letter = None
     
@@ -54,24 +55,29 @@ def try_to_guess(window):
     if guessed_letter in used_letters:
         print(f'эта буква уже была, попробуйте снова')
         window.message_text.set('эта буква уже была, попробуйте снова')
+        window.game_state_text.set('')
         return   
     if len(guessed_letter) == 0:
         print(f'введите букву')
         window.message_text.set('введите букву')
+        window.game_state_text.set('')
         return
     if len(guessed_letter) > 1:
         print(f'введите 1 букву')
-        window.message_text.set('введите букву')
+        window.message_text.set('введите 1 букву')
+        window.game_state_text.set('')
         return
-    if ord(guessed_letter) > 127: #функция ord() возвращает значение символа по Юникоду, 127 последняя англ. буква
+    if ord(guessed_letter) > 127 or ord(guessed_letter) < 65 or (ord(guessed_letter) >90 and ord(guessed_letter) < 97): #функция ord() возвращает значение символа по Юникоду, 127 последняя англ. буква
         print(f'буква должна быть английского алфавита')
         window.message_text.set('буква должна быть английского алфавита')
+        window.game_state_text.set('')
         return
     if any(char.isnumeric() for char in guessed_letter):
         print ('введена цифра, введите букву')
         window.message_text.set('введена цифра, введите букву')
+        window.game_state_text.set('')
         return
-        
+    window.game_state_text.set('')
     return guessed_letter
 
 while turn < 6 and '|_|' in hidden_list:
@@ -92,7 +98,7 @@ while turn < 6 and '|_|' in hidden_list:
     hidden_word = ''        
     hidden_word = hidden_word.join(hidden_list)
     print(f'used_letters: {used_letters}')
-    window.used_letters_text.set(f'{used_letters}')
+    window.used_letters_text.set(f'использованные буквы: {used_letters}')
     print(hidden_word)
     window.word_text.set(f'{hidden_word}')
     
@@ -100,9 +106,11 @@ while turn < 6 and '|_|' in hidden_list:
         new_drawing.partial_drawing(turn)
     if '|_|' not in hidden_list:
         print('Победа!')
+        window.win_state_text.set('Победа')
         break
     if turn == 6:
         print('Поражение')
+        window.win_state_text.set('Поражение')
 
 #my_drawing.turtle.mainloop()
 window.window.mainloop()

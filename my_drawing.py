@@ -9,27 +9,37 @@ class MainWindow:
             self.window = tkinter.Tk()  #не работает
             self.canvas1 = tkinter.Canvas(self.window, width=600, height=600)
             self.canvas1.grid(column=1, row=1)
+            
+            self.game_state_text = tkinter.StringVar()
+            self.game_state = tkinter.Label(self.window, textvariable = self.game_state_text)
+            self.game_state.grid(column=1, row=2)
+
 
             self.message_text = tkinter.StringVar()
             self.message_box = tkinter.Label(self.window, textvariable = self.message_text)
             self.message_text.set('message box')
-            self.message_box.grid(column=1, row=2)
+            self.message_box.grid(column=1, row=3)
 
             self.word_text = tkinter.StringVar()
             self.word_box = tkinter.Label(self.window, textvariable = self.word_text)
             self.word_text.set('word_box')
-            self.word_box.grid(column=1, row=3)
+            self.word_box.grid(column=1, row=4)
 
             self.used_letters_text = tkinter.StringVar()
             self.used_letters_box = tkinter.Label(self.window, textvariable = self.used_letters_text)
             self.used_letters_text.set('used_letters_text')
-            self.used_letters_box.grid(column=1, row=4)
+            self.used_letters_box.grid(column=1, row=5)
    
             self.screen = turtle.TurtleScreen(self.canvas1)
             self.test_turtle = turtle.RawTurtle(self.screen)
             self.entry_window_text = tkinter.StringVar()
             self.entry_window = tkinter.Entry(self.window, textvariable = self.entry_window_text)
-            self.entry_window.grid(column=1, row=5)
+            self.entry_window.grid(column=1, row=6)
+
+            self.win_state_text = tkinter.StringVar()
+            self.win_state_text_space = tkinter.Label(self.window, textvariable = self.win_state_text)
+            self.win_state_text_space.place(x=300, y=100)
+            
 
             # Добавляем переменную для хранения введенной буквы
             self.guessed_letter = None
