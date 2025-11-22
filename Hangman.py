@@ -1,3 +1,5 @@
+import sys
+import os
 import random
 from pathlib import Path
 import json
@@ -5,7 +7,15 @@ import my_drawing
 
 window = my_drawing.MainWindow()
 new_drawing = my_drawing.DrawingHangman(window.test_turtle)
-file_path = Path('new_file.json')
+
+if getattr(sys, 'frozen', False):
+    # Если приложение собрано, используем директорию исполняемого файла
+    base_path = Path(sys._MEIPASS)
+else:
+    # Если запущено как скрипт, используем директорию скрипта
+    base_path = Path(__file__).parent
+
+file_path = base_path / 'words.json'
 
 if file_path.exists():
     print("Файл найден! Открываю...")
